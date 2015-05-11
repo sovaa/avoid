@@ -7,7 +7,8 @@ module.exports = function(grunt) {
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
-		clientCSS: ['public/modules/**/*.css'],
+        clientCSS: ['public/modules/**/*.css'],
+        clientSASS: ['public/modules/**/*.sass'],
 		mochaTests: ['app/tests/**/*.js']
 	};
 
@@ -41,6 +42,13 @@ module.exports = function(grunt) {
 					livereload: true
 				}
 			},
+            clientSASS: {
+                files: watchFiles.clientSASS,
+                tasks: ['sass'],
+                options: {
+                    livereload: true
+                }
+            },
 			clientCSS: {
 				files: watchFiles.clientCSS,
 				tasks: ['csslint'],
@@ -49,6 +57,16 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+        sass: {
+            dist: {
+                files: [{
+                    expand: true,
+                    src: watchFiles.clientSASS,
+                    dest: '.',
+                    ext: '.css'
+                }]
+            }
+        },
 		jshint: {
 			all: {
 				src: watchFiles.clientJS.concat(watchFiles.serverJS),
@@ -59,7 +77,7 @@ module.exports = function(grunt) {
 		},
 		csslint: {
 			options: {
-				csslintrc: '.csslintrc',
+				csslintrc: '.csslintrc'
 			},
 			all: {
 				src: watchFiles.clientCSS
@@ -157,8 +175,10 @@ module.exports = function(grunt) {
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
 
+    grunt.loadNpmTasks('grunt-contrib-sass');
+
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['sass', 'lint', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);

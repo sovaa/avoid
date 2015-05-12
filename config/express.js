@@ -57,12 +57,17 @@ module.exports = function(db) {
 	// Showing stack errors
 	app.set('showStackError', true);
 
-	// Set swig as the template engine
-	app.engine('server.view.html', consolidate[config.templateEngine]);
+	// Set jade as the template engine
+	//app.engine('index.jade', consolidate[config.templateEngine]);
 
 	// Set views path and view engine
-	app.set('view engine', 'server.view.html');
-	app.set('views', './app/views');
+	app.set('view engine', 'jade');
+	app.set('views', __dirname + '/../server/views');
+
+    // handle all routes, angular app will handle specific routes
+    app.get('*', function(req, res) {
+        res.render('index');
+    });
 
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {

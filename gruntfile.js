@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         clientViews: ['public/modules/**/views/**/*.html'],
         clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
         clientCSS: ['public/modules/**/*.css'],
-        clientSASS: ['public/modules/**/*.sass'],
+        clientSASS: ['public/css/*.sass'],
         mochaTests: ['app/tests/**/*.js']
     };
 
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             clientViews: {
                 files: watchFiles.clientViews,
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientJS: {

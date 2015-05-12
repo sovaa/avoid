@@ -2,16 +2,17 @@
 /**
  * Module dependencies.
  */
-var init = require('./config/init')(),
+/*var init = require('./config/init')(),
 	config = require('./config/config'),
 	mongoose = require('mongoose'),
-	chalk = require('chalk');
+	chalk = require('chalk');*/
 
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
  */
 
+/*
 // Bootstrap db connection
 var db = mongoose.connect(config.db, function(err) {
 	if (err) {
@@ -30,7 +31,23 @@ require('./config/passport')();
 app.listen(config.port);
 
 // Expose app
-exports = module.exports = app;
+exports = module.exports = app;*/
+
+var express = require('express');
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var app = express();
+
+app.set('views', __dirname + '/server/views');
+app.set('view engine', 'jade');
+
+app.use(express.static(__dirname + '/public'));
+app.get('*', function(req, res) {
+    res.render('index');
+});
 
 // Logging initialization
-console.log('MEAN.JS application started on port ' + config.port);
+var port = 3000;
+console.log('MEAN.JS application started on port ' + port);
+app.listen(port);
+
+exports = module.exports = app;

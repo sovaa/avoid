@@ -1,8 +1,8 @@
 doctype html
-html
+html(data-ng-app="avoidApp")
   head
     link(rel="stylesheet", href="/lib/bootstrap/dist/css/bootstrap.css")
     link(rel="stylesheet", href="/css/main.css")
-  body
+  body(data-ng-controller="MainController")
     block main-content
     include scripts

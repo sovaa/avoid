@@ -1,0 +1,1 @@
+angular.module('avoidApp', ['ngRoute', 'appRoutes', 'MainController', 'MainService']);

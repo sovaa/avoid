@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('avoidApp', []).controller('MainController', function($scope) {
-    $scope.tagline = 'bajsbajsbajs';
+angular.module('avoidApp', []).controller('MainController', function() {
+    this.tagline = 'bajsbajsbajs';
 
-    $scope.gamedata = {
+    this.gamedata = {
         wood: 10,
         meat: 0,
         population: 1
     };
 
-    $scope.stokeFire(function() {
-        alert("fire");
-    });
+    this.stokeFire = function() {
+        alert('fire');
+    };
 });
